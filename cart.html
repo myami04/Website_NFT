@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Wallet - Metalink Premium</title>
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./assets/css/style.css">
+  
+  <style>
+    /* --- CSS RIÊNG CHO CÁC THÀNH PHẦN CỦA CART --- */
+    /* Không set background-color cho body nữa để dùng chung với index.html */
+    
+    :root {
+      --bg-card: #16161e;
+      --primary: #00ffaa;
+      --border: #2a2a35;
+      --text-muted: #8c8c9e;
+    }
+
+    /* Chỉ định màu chữ trắng cho nội dung cart để nổi bật trên nền tối */
+    .cart-section { 
+      padding: 60px 0 100px; 
+      color: #ffffff;
+    }
+    
+    .page-title { 
+      font-size: 36px; font-weight: 800; margin-bottom: 40px; 
+      background: linear-gradient(to right, #fff, #888); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent; 
+      margin-top: 20px;
+    }
+
+    .cart-grid { display: grid; grid-template-columns: 2.5fr 1fr; gap: 40px; }
+    
+    .cart-table-wrapper {
+      background: var(--bg-card);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; padding: 20px; background: #1f1f2b; color: var(--text-muted); font-size: 14px; text-transform: uppercase; }
+    td { padding: 20px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    
+    .product-info { display: flex; align-items: center; gap: 15px; }
+    .product-img { width: 70px; height: 70px; border-radius: 10px; object-fit: cover; border: 1px solid var(--border); }
+    .product-name { font-weight: 700; margin-bottom: 5px; color: white; }
+    .product-creator { font-size: 13px; color: var(--text-muted); }
+    
+    /* Quantity Styles */
+    .qty-wrapper {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--bg-card); /* Sửa lại background để tiệp màu */
+      width: fit-content; padding: 5px 10px;
+      border-radius: 8px; border: 1px solid var(--border);
+    }
+
+    .qty-btn {
+      width: 24px; height: 24px;
+      background: #2a2a35; color: white; border: none; border-radius: 4px;
+      cursor: pointer; display: flex; justify-content: center; align-items: center;
+      transition: 0.2s;
+    }
+    .qty-btn:hover { background: var(--primary); color: black; }
+    .qty-value { font-weight: bold; min-width: 20px; text-align: center; color: white; }
+
+    .row-total { color: var(--primary); font-weight: bold; font-family: monospace; font-size: 16px; }
+
+    .remove-btn {
+      background: transparent; border: none; color: #ff4d4d; 
+      cursor: pointer; font-size: 20px; opacity: 0.7; transition: 0.3s;
+    }
+    .remove-btn:hover { opacity: 1; transform: scale(1.1); }
+
+    /* Summary Card */
+    .summary-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      position: sticky; top: 120px; height: fit-content;
+      color: white;
+    }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; color: var(--text-muted); }
+    .summary-row.total { border-top: 1px dashed var(--border); padding-top: 20px; margin-top: 20px; color: white; font-weight: 700; font-size: 18px; align-items: center; }
+    .total-price { font-size: 28px; color: var(--primary); text-shadow: 0 0 15px rgba(0,255,170,0.3); }
+
+    .btn-checkout {
+      width: 100%; margin-top: 20px; padding: 16px; border: none; border-radius: 12px;
+      background: linear-gradient(135deg, #00ffaa, #00cc88); color: black; font-weight: 800; cursor: pointer;
+      text-transform: uppercase; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.3s;
+    }
+    .btn-checkout:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,255,170,0.4); }
+
+    /* Mobile Responsive */
+    @media (max-width: 900px) { .cart-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+
+<body id="top">
+
+  <header class="header" data-header>
+    <div class="container">
+
+      <a href="index.html" class="logo-wrapper">
+        <img src="./assets/images/logo-small.svg" width="40" height="40" alt="Metalink" class="logo-small">
+        <img src="./assets/images/logo.svg" width="126" height="28" alt="Metalink" class="logo-large">
+      </a>
+
+      <nav class="navbar" data-navbar>
+        <ul class="navbar-list">
+          <li><a href="index.html" class="navbar-link" style="color:white; text-decoration:none; font-size:1.6rem;">Trang chủ</a></li>
+          <li><a href="shop.html" class="navbar-link" style="color:white; text-decoration:none; font-size:1.6rem;">Khám phá</a></li>
+          <li><a href="about.html" class="navbar-link" style="color:white; text-decoration:none; font-size:1.6rem;">Về chúng tôi</a></li>
+          <li><a href="contact.html" class="navbar-link" style="color:white; text-decoration:none; font-size:1.6rem;">Liên hệ</a></li>
+          <li><a href="cart.html" class="navbar-link active" style="color:#00ffaa; text-decoration:none; font-size:1.6rem;">Giỏ hàng</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        
+        <a href="cart.html" class="action-btn" aria-label="Cart">
+          <ion-icon name="bag-handle-outline"></ion-icon>
+          <span class="btn-badge" id="cart-count">0</span>
+        </a>
+
+        <div class="profile-wrapper">
+          <button class="action-btn profile-btn" onclick="toggleProfileMenu()">
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </button>
+
+          <div class="profile-dropdown" id="profileDropdown">
+            <ul class="dropdown-list">
+              <li><a href="notifications.html"><ion-icon name="notifications-outline"></ion-icon> Thông báo</a></li>
+              <li><a href="profile.html"><ion-icon name="person-outline"></ion-icon> Tài khoản</a></li>
+              <li class="border-top"><a href="login.html" class="logout"><ion-icon name="log-out-outline"></ion-icon> Đăng xuất</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <button class="nav-toggle-btn" data-nav-toggler>
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+
+      </div>
+
+    </div>
+  </header>
+
+  <main class="cart-section">
+    <div class="container">
+      <h1 class="page-title">Tài sản kỹ thuật số của bạn</h1>
+
+      <div class="cart-grid">
+        
+        <div class="cart-table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 40%;">Item</th>
+                <th>Giá</th>
+                <th>Số lượng</th> <th>Tổng cộng</th>    <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="cart-body">
+              </tbody>
+          </table>
+        </div>
+
+        <div class="summary-card">
+          <h3 style="margin-bottom:20px;">Tóm tắt đơn hàng</h3>
+          <div class="summary-row">
+            <span>Tổng phụ</span>
+            <span id="sub-total">0.00 ETH</span>
+          </div>
+          <div class="summary-row">
+            <span>Phí</span>
+            <span>~0.0001 ETH</span>
+          </div>
+          
+          <div class="summary-row total">
+            <span>Tổng thanh toán</span>
+            <div style="text-align: right;">
+               <div class="total-price" id="total-price-display">0.00 ETH</div>
+            </div>
+          </div>
+
+          <button class="btn-checkout" onclick="checkoutWithMetaMask()">
+            <ion-icon name="wallet"></ion-icon> Mua ngay
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <a href="#top" class="back-to-top btn-icon" aria-label="back to top" data-back-top-btn>
+    <ion-icon name="arrow-up" aria-hidden="true"></ion-icon>
+  </a>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script src="./assets/js/script.js"></script>
+
+  <script>
+    /* --- LOGIC GIỎ HÀNG --- */
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    if (cart.length === 0) {
+        cart = [
+            { id: 1, name: "Cyber Skull #001", creator: "ArtMaster", price: 0.05, image: "./assets/images/auction-1.jpg", quantity: 1 },
+            { id: 2, name: "Neon Future Car", creator: "MotoDesign", price: 0.12, image: "./assets/images/auction-2.jpg", quantity: 2 }
+        ];
+        saveCart();
+    }
+
+    cart.forEach(item => {
+        if (!item.quantity) item.quantity = 1;
+    });
+
+    const cartBody = document.getElementById('cart-body');
+    const totalDisplay = document.getElementById('total-price-display');
+    const subTotalDisplay = document.getElementById('sub-total');
+    const cartCountBadge = document.getElementById('cart-count'); 
+    let totalETH = 0;
+
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+    }
+
+    function updateCartBadge() {
+        if(cartCountBadge) {
+            const totalQty = cart.reduce((acc, item) => acc + item.quantity, 0);
+            cartCountBadge.innerText = totalQty;
+        }
+    }
+
+    function renderCart() {
+        cartBody.innerHTML = '';
+        totalETH = 0;
+
+        if (cart.length === 0) {
+            cartBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:50px; color:#888;">Cart Empty</td></tr>`;
+            totalDisplay.innerText = "0.00 ETH";
+            subTotalDisplay.innerText = "0.00 ETH";
+            updateCartBadge();
+            return;
+        }
+
+        cart.forEach((item, index) => {
+            let rowTotal = item.price * item.quantity;
+            totalETH += rowTotal;
+            
+            const row = `
+                <tr>
+                    <td>
+                      <div class="product-info">
+                        <img src="${item.image}" class="product-img" onerror="this.src='https://via.placeholder.com/70'">
+                        <div>
+                          <div class="product-name">${item.name}</div>
+                          <div class="product-creator">By ${item.creator || 'Unknown'}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td style="color:#ccc;">${item.price} ETH</td>
+                    <td>
+                        <div class="qty-wrapper">
+                            <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
+                            <span class="qty-value">${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                        </div>
+                    </td>
+                    <td><span class="row-total">${rowTotal.toFixed(3)} ETH</span></td>
+                    <td>
+                        <button class="remove-btn" onclick="removeItem(${index})">
+                          <ion-icon name="trash-outline"></ion-icon>
+                        </button>
+                    </td>
+                </tr>
+            `;
+            cartBody.innerHTML += row;
+        });
+
+        const formattedTotal = totalETH.toFixed(4);
+        totalDisplay.innerText = formattedTotal + " ETH";
+        subTotalDisplay.innerText = formattedTotal + " ETH";
+        updateCartBadge();
+    }
+
+    function updateQty(index, change) {
+        cart[index].quantity += change;
+        if (cart[index].quantity < 1) {
+            if(confirm("Xóa sản phẩm này khỏi giỏ?")) {
+                cart.splice(index, 1);
+            } else {
+                cart[index].quantity = 1;
+            }
+        }
+        saveCart();
+        renderCart();
+    }
+
+    function removeItem(index) {
+        if(confirm("Chắc chắn xóa?")) {
+            cart.splice(index, 1);
+            saveCart();
+            renderCart();
+        }
+    }
+
+    renderCart();
+
+    /* --- PROFILE MENU --- */
+    function toggleProfileMenu() {
+        const dropdown = document.getElementById('profileDropdown');
+        const btn = document.querySelector('.profile-btn');
+        dropdown.classList.toggle('active');
+        if (btn) btn.classList.toggle('active');
+    }
+    window.addEventListener('click', function(e) {
+        const wrapper = document.querySelector('.profile-wrapper');
+        const dropdown = document.getElementById('profileDropdown');
+        if (wrapper && !wrapper.contains(e.target)) {
+            if (dropdown) dropdown.classList.remove('active');
+            const btn = document.querySelector('.profile-btn');
+            if (btn) btn.classList.remove('active');
+        }
+    });
+
+    /* --- THANH TOÁN METAMASK --- */
+    async function checkoutWithMetaMask() {
+        if (typeof window.ethereum === 'undefined') {
+            alert("Vui lòng cài MetaMask!");
+            return;
+        }
+        if (totalETH <= 0) {
+            alert("Giỏ hàng trống!");
+            return;
+        }
+
+        try {
+            const btn = document.querySelector('.btn-checkout');
+            const oldText = btn.innerHTML;
+            btn.innerHTML = "Processing...";
+            btn.style.opacity = 0.7;
+
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const weiValue = BigInt(Math.floor(totalETH * 1000000000000000000)).toString(16);
+            const MY_WALLET = "0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7"; 
+
+            const txParams = {
+                to: MY_WALLET,
+                from: accounts[0],
+                value: '0x' + weiValue
+            };
+
+            const txHash = await window.ethereum.request({
+                method: 'eth_sendTransaction',
+                params: [txParams]
+            });
+
+            alert(`Thanh toán thành công!\nTx: ${txHash}`);
+            cart = [];
+            saveCart();
+            renderCart();
+            btn.innerHTML = oldText;
+            btn.style.opacity = 1;
+
+        } catch (error) {
+            console.error(error);
+            alert("Lỗi: " + error.message);
+            document.querySelector('.btn-checkout').innerHTML = '<ion-icon name="wallet"></ion-icon> Pay Now';
+        }
+    }
+  </script>
+</body>
+</html>

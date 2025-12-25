@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  
+  <style>
+    /* CSS cho trang chi tiết */
+    .detail-section { padding-top: 150px; padding-bottom: 100px; }
+    .detail-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .detail-image-box img { width: 100%; border-radius: 20px; border: 1px solid #333; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+    .detail-info h1 { font-size: 4rem; line-height: 1.2; margin-bottom: 15px; color: white; }
+    .detail-price { font-size: 3rem; color: var(--primary-color, #00ffaa); font-weight: 700; margin-bottom: 30px; }
+    .detail-desc { font-size: 1.6rem; color: #aaa; margin-bottom: 40px; line-height: 1.6; }
+    
+    @media (max-width: 992px) { .detail-wrapper { grid-template-columns: 1fr; } }
+  </style>
+</head>
+
+<body style="background-color: hsl(240, 4%, 6%); color: white;">
+
+  <header class="header" data-header>
+    <div class="container">
+      <a href="index.html">
+        <img src="./assets/images/logo.svg" width="126" alt="Metalink" class="logo">
+      </a>
+      <div class="header-actions">
+        <a href="cart.html" class="header-cart-btn">
+          <ion-icon name="bag-handle-outline"></ion-icon>
+          <span class="btn-badge" id="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="container detail-section">
+      <div class="detail-wrapper" id="product-content">
+        <h2 style="color:white">Đang tải thông tin chi tiết sản phẩm...</h2>
+      </div>
+    </section>
+  </main>
+
+  <script src="./assets/js/app.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
+  <script>
+    // --- HÀM XỬ LÝ METAMASK ---
+    async function buyNow(priceETH, productName) {
+        // 1. Kiểm tra xem có MetaMask chưa
+        if (typeof window.ethereum === 'undefined') {
+            alert("Vui lòng cài đặt MetaMask để sử dụng tính năng này!");
+            window.open('https://metamask.io/download/', '_blank');
+            return;
+        }
+
+        try {
+            // 2. Yêu cầu kết nối ví
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const account = accounts[0]; // Lấy địa chỉ ví người dùng
+
+            // 3. Chuyển đổi giá ETH sang WEI (Đơn vị nhỏ nhất của ETH) & sang Hex
+            // 1 ETH = 10^18 Wei. Tính toán đơn giản:
+            const weiValue = (priceETH * 1000000000000000000).toString(16);
+
+            // 4. Tạo thông số giao dịch (Gửi tiền đến ví chủ shop - ví dụ)
+            const transactionParameters = {
+                to: '0x0000000000000000000000000000000000000000', // Thay bằng địa chỉ ví nhận tiền của bạn
+                from: account,
+                value: '0x' + weiValue, // Giá trị tiền cần trả
+            };
+
+            // 5. Mở Popup MetaMask để xác nhận
+            const txHash = await window.ethereum.request({
+                method: 'eth_sendTransaction',
+                params: [transactionParameters],
+            });
+
+            alert(`Giao dịch thành công!\nMã giao dịch: ${txHash}\nBạn đã sở hữu ${productName}`);
+
+        } catch (error) {
+            console.error(error);
+            // Người dùng từ chối hoặc lỗi
+            if (error.code === 4001) {
+                alert("Bạn đã hủy giao dịch.");
+            } else {
+                alert("Có lỗi xảy ra khi kết nối ví.");
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const productId = parseInt(params.get('id'));
+
+        if (typeof productsDB === 'undefined') {
+            document.getElementById('product-content').innerHTML = "Error: Database not found in app.js";
+            return;
+        }
+
+        const product = productsDB.find(p => p.id === productId);
+        const container = document.getElementById('product-content');
+
+        if (product) {
+            container.innerHTML = `
+                <div class="detail-image-box">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="detail-info">
+                    <h1>${product.name}</h1>
+                    <p style="font-size: 1.8rem; color: #ccc; margin-bottom: 20px;">
+                        Created by <strong style="color:white">${product.creator}</strong>
+                    </p>
+                    <div class="detail-price">
+                        <ion-icon name="logo-ethereum"></ion-icon> ${product.price} ETH
+                    </div>
+                    <p class="detail-desc">${product.description}</p>
+                    
+                    <button class="btn btn-primary" style="border: 1px solid #333; margin-left: 10px; color:white;" onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.image}')">
+                        <ion-icon name="cart-outline"></ion-icon>
+                    </button>
+                    
+                    <br><br>
+                    <a href="shop.html" style="color: #888; text-decoration: underline;">← Quay trở lại</a>
+                </div>
+            `;
+        } else {
+            container.innerHTML = `<h2>Product not found! <a href="shop.html" style="color:var(--primary-color)">Go back</a></h2>`;
+        }
+    });
+  </script>
+
+</body>
+</html>

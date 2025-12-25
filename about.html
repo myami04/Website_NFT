@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Metalink</title>
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  
+  <style>
+    /* CSS RIÊNG CHO TRANG ABOUT */
+    .about-hero { text-align: center; padding: 100px 0 50px; }
+    .about-text { font-size: 1.8rem; color: #ccc; max-width: 800px; margin: 0 auto 50px; line-height: 1.6; }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .team-card {
+      background: #1c1c25;
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid #333;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .team-card:hover { transform: translateY(-10px); border-color: var(--primary-color, #00ffaa); }
+    .team-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 2px solid var(--primary-color); }
+    .team-role { color: var(--primary-color); font-size: 1.4rem; margin-bottom: 10px; }
+  </style>
+</head>
+
+<body style="background-color: hsl(240, 4%, 6%); color: white;">
+
+  <header class="header" data-header>
+    <div class="container">
+      <a href="#">
+        <img src="./assets/images/logo-small.svg" width="40" height="40" alt="Metalink home" class="logo-small">
+      </a>
+      
+     <header class="header" data-header>
+  <div class="container">
+
+    <a href="index.html" class="logo-wrapper">
+      <img src="./assets/images/logo-small.svg" width="40" height="40" alt="Metalink" class="logo-small">
+      <img src="./assets/images/logo.svg" width="126" height="28" alt="Metalink" class="logo-large">
+    </a>
+
+    <nav class="navbar" data-navbar>
+      <ul class="navbar-list">
+        <li><a href="index.html" class="navbar-link active" style="color:white; text-decoration:none; font-size:1.6rem;">Trang chủ</a></li>
+          <li><a href="shop.html" class="navbar-link" style="color:white; text-decoration:none; font-size:1.6rem;">Khám phá</a></li>
+          <li><a href="about.html" class="navbar-link" style="color:#00ffaa; text-decoration:none; font-size:1.6rem;">Về chúng tôi</a></li>
+          <li><a href="contact.html" class="navbar-link" style="color:white; text-decoration:none; font-size:1.6rem;">Liên hệ</a></li>
+        </ul>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      
+      <a href="cart.html" class="action-btn" aria-label="Cart">
+        <ion-icon name="bag-handle-outline"></ion-icon>
+        <span class="btn-badge" id="cart-count">0</span>
+      </a>
+
+      <div class="profile-wrapper">
+        <button class="action-btn profile-btn" onclick="toggleProfileMenu()">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </button>
+
+        <div class="profile-dropdown" id="profileDropdown">
+          <ul class="dropdown-list">
+            <li><a href="notifications.html"><ion-icon name="notifications-outline"></ion-icon> Thông báo</a></li>
+            <li><a href="profile.html"><ion-icon name="person-outline"></ion-icon> Tài khoản</a></li>
+            <li class="border-top"><a href="login.html" class="logout"><ion-icon name="log-out-outline"></ion-icon> Đăng xuất</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="nav-toggle-btn" data-nav-toggler>
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
+
+    </div>
+
+  </div>
+</header>
+      <div class="header-action">
+        <button class="nav-toggle-btn" aria-label="menu toggle" data-nav-toggler>
+          <ion-icon name="menu-outline" aria-hidden="true" class="default-icon"></ion-icon>
+          <ion-icon name="close-outline" aria-hidden="true" class="active-icon"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="container about-hero">
+      <h1 class="headline-md" style="font-size: 4rem; margin-bottom: 20px;">Chúng tôi là Metalink</h1>
+      <p class="about-text">
+        Metalink là nền tảng NFT Marketplace hàng đầu, nơi kết nối các nghệ sĩ kỹ thuật số và nhà sưu tầm trên toàn thế giới. 
+        Sứ mệnh của chúng tôi là trao quyền cho người sáng tạo thông qua công nghệ Blockchain an toàn và minh bạch.
+      </p>
+
+      <h2 style="font-size: 3rem; margin-top: 50px;">Gặp gỡ đội ngũ của chúng tôi</h2>
+      
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="./assets/images/avatar-1.jpg" alt="Member" class="team-img">
+          <a href="profile.html">Trà My</a>
+          <p class="team-role">Founder & CEO</p>
+        </div>
+        <div class="team-card">
+          <img src="./assets/images/avatar-2.jpg" alt="Member" class="team-img">
+          <h3>Anh Quốc</h3>
+          <p class="team-role">Lead Designer</p>
+        </div>
+        <div class="team-card">
+          <img src="./assets/images/Vy.jpg" alt="Member" class="team-img">
+          <h3> Tường Vy</h3>
+          <p class="team-role">Blockchain Dev</p>
+        </div>
+        <div class="team-card">
+          <img src="./assets/images/Chương.gif" alt="Member" class="team-img">
+          <h3>Đức Chương</h3>
+          <p class="team-role">Marketing Head</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+
+    <div class="section footer-top">
+      <div class="container">
+
+        <div class="footer-brand">
+
+          <a href="#">
+            <img src="./assets/images/logo.svg" width="126" height="28" loading="lazy" alt="Metalink home">
+          </a>
+
+          <p class="body-md footer-text">
+            Mua, bán và khám phá các tài sản kỹ thuật số độc quyền của các nghệ sĩ hàng đầu thế giới NFT.
+          </p>
+
+        </div>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="title-lg footer-list-title">Metalink</p>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <ion-icon name="chevron-forward"></ion-icon>
+
+              <span class="span">Khám phá thêm mặt hàng</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <ion-icon name="chevron-forward"></ion-icon>
+
+              <span class="span">Đấu giá trực tiếp</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <ion-icon name="chevron-forward"></ion-icon>
+
+              <span class="span">Các hoạt động</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <ion-icon name="chevron-forward"></ion-icon>
+
+              <span class="span">Ví</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <ion-icon name="chevron-forward"></ion-icon>
+
+              <span class="span">Nhà sáng tạo</span>
+            </a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="title-lg footer-list-title">Liên kết hữu ích</p>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <ion-icon name="chevron-forward"></ion-icon>
+
+              <span class="span">Về chúng tôi</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <ion-icon name="chevron-forward"></ion-icon>
+
+              <span class="span">Blog & Tin tức</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <ion-icon name="chevron-forward"></ion-icon>
+
+              <span class="span">Điều khoản & Điều kiện</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <ion-icon name="chevron-forward"></ion-icon>
+
+              <span class="span">Chính sách bảo mật</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <ion-icon name="chevron-forward"></ion-icon>
+
+              <span class="span">Đăng nhập</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <ion-icon name="chevron-forward"></ion-icon>
+
+              <span href="contact.html" class="span">Liên hệ với chúng tôi</span>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="footer-list">
+
+          <ul>
+
+            <li>
+              <p class="title-lg footer-list-title">Tải xuống ứng dụng Metalink</p>
+            </li>
+
+            <li class="footer-list-item">
+              <a href="#">
+                <img src="./assets/images/appstore.png" width="134" height="40" loading="lazy"
+                  alt="Tải xuống ứng dụng Metalink từ AppStore">
+              </a>
+
+              <a href="#">
+                <img src="./assets/images/playstore.png" width="134" height="40" loading="lazy"
+                  alt="Tải xuống ứng dụng Metalink từ PlayStore">
+              </a>
+            </li>
+
+          </ul>
+
+          <ul>
+
+            <li>
+              <p class="title-lg footer-list-title">Thông tin liên hệ</p>
+            </li>
+
+            <li class="footer-list-item">
+              <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+
+              <a href="mailto:metalink@nft.com" class="footer-link">metalink@nft.com</a>
+            </li>
+
+            <li class="footer-list-item">
+              <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+
+              <a href="tel:+111 234-567-891" class="footer-link">+111 223-566-891</a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+
+        <p class="body-md text-center copyright">
+          &copy; 2022 Metalink. Developed with <span class="span">❤</span> by CMV.
+        </p>
+
+      </div>
+    </div>
+
+  </footer>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+</body>
+</html>

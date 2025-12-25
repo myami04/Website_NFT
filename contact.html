@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liên hệ - Metalink</title>
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- 1. CẤU HÌNH GIAO DIỆN (THEME) --- */
+    :root {
+      --primary: #00ffaa;           /* Màu xanh Neon chủ đạo */
+      --primary-hover: #00d991;
+      --bg-dark: #0b0b10;           /* Nền tối */
+      --card-bg: rgba(30, 30, 40, 0.6); /* Nền kính mờ */
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text-white: #ffffff;
+      --text-gray: #a0a0a0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Urbanist', sans-serif; }
+    
+    body {
+      background-color: var(--bg-dark);
+      /* Hiệu ứng nền Gradient mờ ảo */
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(0, 255, 170, 0.08) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(100, 0, 255, 0.08) 0%, transparent 25%);
+      color: var(--text-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* --- 2. HEADER --- */
+    header { padding: 25px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+    
+    .logo { font-size: 2.6rem; font-weight: 800; color: white; text-decoration: none; letter-spacing: 1px; }
+    .logo span { color: var(--primary); }
+    
+    .menu { display: flex; gap: 40px; list-style: none; }
+    .menu a { text-decoration: none; color: var(--text-white); font-size: 1.6rem; font-weight: 500; transition: 0.3s; }
+    .menu a:hover, .menu a.active { color: var(--primary); text-shadow: 0 0 15px rgba(0,255,170,0.4); }
+
+    .back-btn {
+        padding: 8px 25px;
+        border: 1px solid var(--glass-border);
+        border-radius: 50px;
+        color: white;
+        text-decoration: none;
+        font-size: 1.4rem;
+        transition: 0.3s;
+    }
+    .back-btn:hover { background: white; color: black; }
+
+    /* --- 3. PHẦN CONTACT (CHÍNH) --- */
+    .contact-section { 
+        min-height: calc(100vh - 80px); /* Chiều cao bao phủ màn hình */
+        display: flex; 
+        align-items: center; 
+        padding: 60px 0;
+    }
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr; /* Chia cột: Thông tin nhỏ hơn Form */
+        gap: 80px;
+        align-items: start;
+        width: 100%;
+    }
+
+    /* Cột Thông tin bên trái */
+    .info-box h1 { 
+        font-size: 5rem; 
+        line-height: 1.1; 
+        margin-bottom: 20px; 
+        font-weight: 700;
+        background: linear-gradient(to right, #fff, #999);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .info-box p { font-size: 1.8rem; color: var(--text-gray); margin-bottom: 40px; }
+    
+    .info-item { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; }
+    .icon-box { 
+      width: 50px; height: 50px; 
+      background: rgba(255,255,255,0.03); 
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--primary);
+      font-size: 2.4rem;
+      box-shadow: 0 0 20px rgba(0,255,170,0.05);
+    }
+    .info-text h3 { font-size: 1.8rem; margin-bottom: 4px; font-weight: 600; }
+    .info-text span { font-size: 1.6rem; color: var(--text-gray); }
+
+    /* Cột Form bên phải (Glassmorphism) */
+    .form-box {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px); /* Hiệu ứng mờ kính */
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      padding: 50px;
+      border-radius: 24px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    }
+
+    .input-group { margin-bottom: 25px; }
+    
+    .styled-input {
+      width: 100%;
+      padding: 18px 20px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      color: white;
+      font-size: 1.6rem;
+      transition: all 0.3s ease;
+    }
+    .styled-input:focus {
+      border-color: var(--primary);
+      outline: none;
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 15px rgba(0, 255, 170, 0.15);
+    }
+    .styled-input::placeholder { color: #555; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 18px;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex; justify-content: center; align-items: center; gap: 10px;
+      margin-top: 10px;
+    }
+    .btn-submit:hover {
+      background: var(--primary-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 255, 170, 0.25);
+    }
+
+    /* Spinner Loading */
+    .spinner { display: none; width: 20px; height: 20px; border: 2px solid #000; border-top: 2px solid transparent; border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Responsive Mobile */
+    @media (max-width: 992px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 50px; }
+      .form-box { padding: 30px; }
+      .info-box h1 { font-size: 3.6rem; text-align: center; }
+      .info-box p { text-align: center; }
+      .info-item { justify-content: center; }
+      .menu { display: none; } /* Ẩn menu trên mobile cho gọn */
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo">META<span>LINK</span></a>
+      <ul class="menu">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="shop.html">Khám phá</a></li>
+        <li><a href="about.html">Về chúng tôi</a></li>
+        <li><a href="contact.html" class="active">Liên hệ</a></li>
+      </ul>
+      <a href="index.html" class="back-btn">Quay lại</a>
+    </div>
+  </header>
+
+  <main class="contact-section">
+    <div class="container contact-grid">
+      
+      <div class="info-box">
+        <h1>Kết nối với<br>Tương lai</h1>
+        <p>Chúng tôi sẵn sàng lắng nghe ý tưởng của bạn. Đừng ngần ngại gửi tin nhắn, đội ngũ Metalink sẽ phản hồi ngay lập tức.</p>
+        
+        <div class="info-item">
+          <div class="icon-box"><ion-icon name="location"></ion-icon></div>
+          <div class="info-text">
+            <h3>Trụ sở chính</h3>
+            <span>123 Blockchain Street, Metaverse City</span>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="icon-box"><ion-icon name="mail"></ion-icon></div>
+          <div class="info-text">
+            <h3>Email hỗ trợ</h3>
+            <span>myami31082004@gmail.com</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="icon-box"><ion-icon name="call"></ion-icon></div>
+          <div class="info-text">
+            <h3>Hotline</h3>
+            <span>+84 999 888 777</span>
+          </div>
+        </div>
+      </div>
+
+      <form id="contactForm" class="form-box" action="https://formsubmit.co/myami31082004@gmail.com" method="POST">
+        
+        <input type="hidden" name="_captcha" value="false"> <input type="hidden" name="_template" value="table"> <input type="hidden" name="_subject" value="🚀 Tin nhắn mới từ khách hàng Metalink!">
+
+        <div class="input-group">
+          <input type="text" name="name" class="styled-input" placeholder="Họ và tên của bạn" required>
+        </div>
+
+        <div class="input-group">
+          <input type="email" name="email" class="styled-input" placeholder="Địa chỉ Email" required>
+        </div>
+
+        <div class="input-group">
+          <textarea name="message" rows="5" class="styled-input" placeholder="Nội dung tin nhắn..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span class="btn-text">Gửi Tin Nhắn</span>
+          <div class="spinner"></div>
+        </button>
+        
+        <p id="statusMessage" style="margin-top: 20px; text-align: center; font-size: 1.5rem; min-height: 25px;"></p>
+      </form>
+
+    </div>
+  </main>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script>
+    // JAVASCRIPT XỬ LÝ GỬI FORM KHÔNG LOAD LẠI TRANG
+    const form = document.getElementById("contactForm");
+    const statusMsg = document.getElementById("statusMessage");
+    const btnText = document.querySelector(".btn-text");
+    const spinner = document.querySelector(".spinner");
+    const submitBtn = document.getElementById("submitBtn");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault(); // Ngăn trình duyệt chuyển trang
+
+      // 1. Hiển thị trạng thái đang gửi
+      btnText.style.display = "none";
+      spinner.style.display = "block";
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = "0.7";
+      statusMsg.innerHTML = "";
+
+      // 2. Thu thập dữ liệu
+      const formData = new FormData(form);
+
+      // 3. Gửi dữ liệu đi
+      fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: { 
+            'Accept': 'application/json' 
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          statusMsg.innerHTML = "✅ Gửi thành công! Chúng tôi sẽ liên hệ lại sớm.";
+          statusMsg.style.color = "#00ffaa";
+          form.reset(); // Xóa nội dung form
+        } else {
+          statusMsg.innerHTML = "❌ Có lỗi xảy ra. Vui lòng thử lại sau.";
+          statusMsg.style.color = "#ff4d4d";
+        }
+      })
+      .catch(error => {
+        statusMsg.innerHTML = "❌ Lỗi kết nối mạng!";
+        statusMsg.style.color = "#ff4d4d";
+      })
+      .finally(() => {
+        // 4. Khôi phục trạng thái nút bấm
+        btnText.style.display = "block";
+        spinner.style.display = "none";
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = "1";
+        
+        // Tự động ẩn thông báo sau 6 giây
+        setTimeout(() => {
+            statusMsg.innerHTML = "";
+        }, 6000);
+      });
+    });
+  </script>
+
+</body>
+</html>

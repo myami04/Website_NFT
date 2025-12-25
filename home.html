@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NFT Universe - Khám Phá Nghệ Thuật Số</title>
+  
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <style>
+    /* CSS bổ sung để căn chỉnh Header đơn giản */
+    .header .container {
+        display: flex;
+        justify-content: space-between; /* Đẩy Logo sang trái, Nút đăng nhập sang phải */
+        align-items: center;
+    }
+  </style>
+</head>
+
+<body id="top">
+
+  <header class="header" data-header>
+    <div class="container">
+
+      <a href="index.html" class="logo-wrapper">
+        <img src="./assets/images/logo-small.svg" width="40" height="40" alt="Metalink" class="logo-small">
+        <img src="./assets/images/logo.svg" width="126" height="28" alt="Metalink" class="logo-large">
+      </a>
+
+      <a href="login.html" class="btn btn-primary" style="padding: 10px 30px; border-radius: 30px; text-decoration: none;">
+        Đăng nhập
+      </a>
+
+    </div>
+  </header>
+
+  <main>
+    <article>
+      
+      <section class="section hero" aria-label="home">
+        <div class="container">
+          <h1 class="headline-lg hero-title">
+            Sở Hữu Tác Phẩm <span class="span">Kỹ Thuật Số</span> Hiếm Có
+          </h1>
+          <p class="section-text body-lg">
+            Tham gia cộng đồng NFT lớn nhất thế giới để mua bán, trao đổi và trưng bày các vật phẩm độc bản được bảo chứng bởi Blockchain.
+          </p>
+        </div>
+      </section>
+
+      <section class="section discover" aria-labelledby="discover-label">
+        <div class="container">
+          <h2 class="headline-md section-title text-center" id="discover-label">Bộ Sưu Tập Nổi Bật</h2>
+          
+          <ul class="grid-list">
+            
+            <li>
+                <div class="discover-card card">
+                <div class="card-banner img-holder" style="--width: 500; --height: 500;">
+                    <img src="./assets/images/showcase-8.gif" width="500" height="500" loading="lazy" alt="Genuine Undead #3902" class="img-cover">
+                    <button class="btn btn-primary" onclick="addToCart(1, 'Genuine Undead #3902', 3.5, './assets/images/showcase-8.gif')">
+                    <ion-icon name="bag-add-outline" aria-hidden="true"></ion-icon>
+                    <span class="span">Mua ngay</span>
+                    </button>
+                </div>
+                <div class="card-profile">
+                    <img src="./assets/images/avatar-8.jpg" width="32" height="32" loading="lazy" alt="StreetBoy profile" class="img">
+                    <a href="#" class="link:hover">@StreetBoy</a>
+                </div>
+                <h3 class="title-sm card-title"><a href="#" class="link:hover">Genuine Undead #3902</a></h3>
+                <div class="card-meta">
+                    <div>
+                    <p>Giá</p>
+                    <div class="card-price">
+                        <img src="./assets/images/ethereum.svg" width="16" height="24" loading="lazy" alt="ethereum icon">
+                        <span class="span">3.2 ETH</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </li>
+            <li>
+                <div class="discover-card card">
+                <div class="card-banner img-holder" style="--width: 500; --height: 500;">
+                    <img src="./assets/images/showcase-6.gif" width="500" height="500" loading="lazy" alt="Probably A Label #3277" class="img-cover">
+                    <button class="btn btn-primary" onclick="addToCart(3, 'Probably A Label #3277', 3.5, './assets/images/showcase-6.gif')">
+                    <ion-icon name="bag-add-outline" aria-hidden="true"></ion-icon>
+                    <span class="span">Mua ngay</span>
+                    </button>
+                </div>
+                <div class="card-profile">
+                    <img src="./assets/images/avatar-6.gif" width="32" height="32" loading="lazy" alt="ButterFly profile" class="img">
+                    <a href="#" class="link:hover">@ButterFly</a>
+                </div>
+                <h3 class="title-sm card-title"><a href="#" class="link:hover">Probably A Label #3277</a></h3>
+                <div class="card-meta">
+                    <div>
+                    <p>Giá</p>
+                    <div class="card-price">
+                        <img src="./assets/images/ethereum.svg" width="16" height="24" loading="lazy" alt="ethereum icon">
+                        <span class="span">4.2 ETH</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </li>
+            <li>
+                <div class="discover-card card">
+                <div class="card-banner img-holder" style="--width: 500; --height: 500;">
+                    <img src="./assets/images/showcase-4.jpg" width="500" height="500" loading="lazy" alt="Shibuya Scramble Punks" class="img-cover">
+                    <button class="btn btn-primary" onclick="addToCart(5, 'Shibuya Scramble Punks', 3.5, './assets/images/showcase-4.jpg')">
+                    <ion-icon name="bag-add-outline" aria-hidden="true"></ion-icon>
+                    <span class="span">Mua ngay</span>
+                    </button>
+                </div>
+                <div class="card-profile">
+                    <img src="./assets/images/avatar-4.jpg" width="32" height="32" loading="lazy" alt="BigBull profile" class="img">
+                    <a href="#" class="link:hover">@BigBull</a>
+                </div>
+                <h3 class="title-sm card-title"><a href="#" class="link:hover">Shibuya Scramble Punks</a></h3>
+                <div class="card-meta">
+                    <div>
+                    <p>Giá</p>
+                    <div class="card-price">
+                        <img src="./assets/images/ethereum.svg" width="16" height="24" loading="lazy" alt="ethereum icon">
+                        <span class="span">3.7 ETH</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </li>
+            <li>
+                <div class="discover-card card">
+                <div class="card-banner img-holder" style="--width: 500; --height: 500;">
+                    <img src="./assets/images/showcase-3.jpg" width="500" height="500" loading="lazy" alt="Probably A Label #650" class="img-cover">
+                    <button class="btn btn-primary" onclick="addToCart(6, 'Probably A Label #650', 3.5, './assets/images/showcase-3.jpg')">
+                    <ion-icon name="bag-add-outline" aria-hidden="true"></ion-icon>
+                    <span class="span">Mua ngay</span>
+                    </button>
+                </div>
+                <div class="card-profile">
+                    <img src="./assets/images/avatar-3.jpg" width="32" height="32" loading="lazy" alt="Angel profile" class="img">
+                    <a href="#" class="link:hover">@Angel</a>
+                </div>
+                <h3 class="title-sm card-title"><a href="#" class="link:hover">Probably A Label #650</a></h3>
+                <div class="card-meta">
+                    <div>
+                    <p>Giá</p>
+                    <div class="card-price">
+                        <img src="./assets/images/ethereum.svg" width="16" height="24" loading="lazy" alt="ethereum icon">
+                        <span class="span">3.6 ETH</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="section footer-top">
+      <div class="container">
+        <div class="footer-brand">
+          <a href="#">
+            <img src="./assets/images/logo.svg" width="126" height="28" loading="lazy" alt="Metalink home">
+          </a>
+          <p class="body-md footer-text">
+            Mua, bán và khám phá các tài sản kỹ thuật số độc quyền của các nghệ sĩ hàng đầu thế giới NFT.
+          </p>
+        </div>
+
+        <ul class="footer-list">
+          <li><p class="title-lg footer-list-title">Metalink</p></li>
+          <li><a href="#" class="footer-link"><ion-icon name="chevron-forward"></ion-icon><span class="span">Khám phá thêm</span></a></li>
+          <li><a href="#" class="footer-link"><ion-icon name="chevron-forward"></ion-icon><span class="span">Đấu giá</span></a></li>
+          <li><a href="#" class="footer-link"><ion-icon name="chevron-forward"></ion-icon><span class="span">Ví</span></a></li>
+        </ul>
+
+        <ul class="footer-list">
+          <li><p class="title-lg footer-list-title">Liên kết hữu ích</p></li>
+          <li><a href="#" class="footer-link"><ion-icon name="chevron-forward"></ion-icon><span class="span">Về chúng tôi</span></a></li>
+          <li><a href="#" class="footer-link"><ion-icon name="chevron-forward"></ion-icon><span class="span">Blog & Tin tức</span></a></li>
+          <li><a href="#" class="footer-link"><ion-icon name="chevron-forward"></ion-icon><span class="span">Điều khoản</span></a></li>
+          <li><a href="#" class="footer-link"><ion-icon name="chevron-forward"></ion-icon><span class="span">Bảo mật</span></a></li>
+        </ul>
+
+        <div class="footer-list">
+          <ul>
+            <li><p class="title-lg footer-list-title">Tải ứng dụng</p></li>
+            <li class="footer-list-item">
+              <a href="#"><img src="./assets/images/appstore.png" width="134" height="40" loading="lazy" alt="AppStore"></a>
+              <a href="#"><img src="./assets/images/playstore.png" width="134" height="40" loading="lazy" alt="PlayStore"></a>
+            </li>
+          </ul>
+          <ul>
+            <li><p class="title-lg footer-list-title">Liên hệ</p></li>
+            <li class="footer-list-item">
+              <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+              <a href="mailto:metalink@nft.com" class="footer-link">metalink@nft.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="body-md text-center copyright">
+          &copy; 2022 Metalink. Developed with <span class="span">❤</span> by CMV.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#top" class="back-to-top btn-icon" aria-label="back to top" data-back-top-btn>
+    <ion-icon name="arrow-up" aria-hidden="true"></ion-icon>
+  </a>
+
+  <script src="./assets/js/script.js"></script>
+  
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

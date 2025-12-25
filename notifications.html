@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Notifications - Metalink</title>
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <style>
+    /* CSS RIÊNG CHO TRANG NOTIFICATION */
+    .notif-section { max-width: 800px; margin: 0 auto; padding-top: 50px; }
+    .notif-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+    
+    .notif-list { list-style: none; }
+    .notif-item { 
+      background: #1c1c25; 
+      padding: 20px; 
+      border-radius: 12px; 
+      margin-bottom: 15px; 
+      display: flex; 
+      gap: 20px; 
+      align-items: center;
+      transition: 0.2s;
+      border-left: 4px solid transparent;
+    }
+    
+    .notif-item:hover { background: #252530; }
+    .notif-item.unread { border-left-color: var(--primary-color, #00ffaa); background: #2a2a35; }
+    
+    .notif-icon { 
+      width: 50px; height: 50px; 
+      border-radius: 50%; 
+      background: rgba(0, 255, 170, 0.1); 
+      color: #00ffaa; 
+      display: flex; justify-content: center; align-items: center; font-size: 24px; 
+    }
+    
+    .notif-content h3 { font-size: 1.6rem; margin-bottom: 5px; color: white; }
+    .notif-content p { font-size: 1.4rem; color: #888; }
+    .notif-time { margin-left: auto; font-size: 1.2rem; color: #666; }
+  </style>
+</head>
+
+<body style="background-color: hsl(240, 4%, 6%); color: white;">
+
+  <header class="header">
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; padding:20px 0;">
+      <a href="index.html"><img src="./assets/images/logo.svg" width="126" alt="Metalink"></a>
+      <a href="index.html" style="color:white; font-size:1.6rem; text-decoration:none;">← Quay trở lại Trang chủ</a>
+    </div>
+  </header>
+
+  <main class="container notif-section">
+    <div class="notif-header">
+      <h1 style="font-size: 3rem;">Thông báo</h1>
+      <button style="background:none; border:none; color:#00ffaa; font-size:1.4rem; cursor:pointer;">Đánh dấu tất cả là đã đọc</button>
+    </div>
+
+    <ul class="notif-list">
+      
+      <li class="notif-item unread">
+        <div class="notif-icon">
+          <ion-icon name="wallet-outline"></ion-icon>
+        </div>
+        <div class="notif-content">
+          <h3>Thanh toán thành công</h3>
+          <p>Bạn đã mua thành công "Cyber Skull #001" với giá 2.5 ETH.</p>
+        </div>
+        <span class="notif-time">2 phút trước</span>
+      </li>
+
+      <li class="notif-item">
+        <div class="notif-icon">
+          <ion-icon name="heart-outline"></ion-icon>
+        </div>
+        <div class="notif-content">
+          <h3>Lượt thích mới</h3>
+          <p>@CrazyAnyone đã thích sản phẩm của bạn "Digital Art".</p>
+        </div>
+        <span class="notif-time">1 giờ trước</span>
+      </li>
+
+      <li class="notif-item">
+        <div class="notif-icon" style="color: #ff4d4d; background: rgba(255, 77, 77, 0.1);">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+        </div>
+        <div class="notif-content">
+          <h3>Cảnh báo bảo mật</h3>
+          <p>Phát hiện đăng nhập mới từ thiết bị mới (iPhone 17).</p>
+        </div>
+        <span class="notif-time">1 ngày trước</span>
+      </li>
+
+      <li class="notif-item">
+        <div class="notif-icon" style="color: #ffa500; background: rgba(255, 165, 0, 0.1);">
+          <ion-icon name="pricetag-outline"></ion-icon>
+        </div>
+        <div class="notif-content">
+          <h3>Đặt giá thầu mới</h3>
+          <p>Bạn đã đặt giá thầu 0.5 ETH cho "Future Car".</p>
+        </div>
+        <span class="notif-time">2 ngày trước</span>
+      </li>
+
+    </ul>
+  </main>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+</body>
+</html>

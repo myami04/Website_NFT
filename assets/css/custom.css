@@ -1,0 +1,261 @@
+/* assets/css/custom.css */
+
+/* --- Biến màu dùng chung (Lấy từ Metalink) --- */
+:root {
+  --primary-purple: hsl(271, 76%, 53%);
+  --bg-dark: hsl(240, 11%, 9%);
+  --card-bg: hsl(240, 9%, 13%);
+  --text-gray: hsl(240, 6%, 79%);
+}
+
+/* --- Tùy chỉnh Form Login/Register --- */
+.login-section {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+.login-box {
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 50px;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hiệu ứng neon mờ phía sau */
+.login-box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(138,43,226,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.form-group { margin-bottom: 20px; position: relative; z-index: 2; }
+.form-label { display: block; margin-bottom: 8px; color: white; font-weight: 600; }
+
+.form-input {
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 14px;
+  border-radius: 12px;
+  color: white;
+  font-family: 'Urbanist', sans-serif;
+  transition: 0.3s;
+}
+/* ----------------------------------- */
+/* #CART PAGE STYLES                   */
+/* ----------------------------------- */
+
+.cart {
+  padding-block-start: 120px; /* Cách header ra một chút */
+  min-height: 80vh; /* Đảm bảo trang không bị ngắn quá */
+}
+
+/* --- Table Styles --- */
+.table-wrapper {
+  overflow-x: auto; /* Cho phép cuộn ngang trên điện thoại */
+  background-color: var(--bg-card); /* Dùng màu nền card của bạn */
+  border: 1px solid var(--border-color, #333);
+  border-radius: 16px;
+  padding: 20px;
+  margin-block-end: 40px;
+  box-shadow: var(--shadow-1);
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Đảm bảo bảng không bị co quá nhỏ */
+}
+
+.cart-table th, 
+.cart-table td {
+  padding: 16px;
+  text-align: left;
+  border-block-end: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-color, #fff);
+}
+
+.cart-table th {
+  font-family: var(--font-urbanist);
+  font-weight: 700;
+  color: var(--primary-color, hsl(125, 100%, 70%)); /* Màu xanh neon */
+  text-transform: uppercase;
+  font-size: 1.4rem;
+}
+
+.cart-table td {
+  vertical-align: middle;
+  font-size: 1.6rem;
+}
+
+/* Nút tăng giảm số lượng trong bảng */
+.qty-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.qty-btn:hover {
+  background-color: var(--primary-color, hsl(125, 100%, 70%));
+  color: black;
+}
+
+/* --- Order Summary Styles --- */
+.cart-summary {
+  display: flex;
+  justify-content: flex-end; /* Đẩy sang phải */
+}
+
+.summary-card {
+  background-color: var(--bg-card, #1a1a1a);
+  border: 1px solid var(--border-color, #333);
+  padding: 30px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: 20px;
+  font-size: 1.8rem;
+  border-block-end: 1px dashed rgba(255, 255, 255, 0.2);
+  padding-bottom: 20px;
+}
+
+.price-highlight {
+  color: var(--primary-color, hsl(125, 100%, 70%));
+  font-weight: 700;
+  font-size: 2.2rem;
+}
+
+/* Nút xóa */
+.btn-remove {
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-remove:hover {
+  transform: scale(1.2);
+}
+
+.form-input:focus {
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+  outline: none;
+}
+
+/* --- Tùy chỉnh Giỏ hàng (Table) --- */
+.cart-wrapper {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+  color: white;
+}
+
+.cart-table th {
+  text-align: left;
+  padding: 20px;
+  color: var(--primary-purple);
+  font-size: 18px;
+  border-bottom: 2px solid rgba(255,255,255,0.05);
+}
+
+.cart-table td {
+  padding: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  vertical-align: middle;
+}
+
+.cart-item-info { display: flex; align-items: center; gap: 15px; }
+.cart-img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; }
+
+.btn-delete {
+  background: rgba(255, 50, 50, 0.1);
+  color: #ff4d4d;
+  border: 1px solid rgba(255, 50, 50, 0.2);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-delete:hover { background: #ff4d4d; color: white; }
+
+/* --- Tùy chỉnh Profile --- */
+.profile-hero {
+  height: 250px;
+  background: linear-gradient(to right, #240b36, #1a0b2e);
+  position: relative;
+  border-radius: 0 0 30px 30px;
+}
+.profile-avatar-container {
+  text-align: center;
+  margin-top: -75px;
+  position: relative;
+  z-index: 5;
+}
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid var(--primary-purple);
+  background: #000;
+  object-fit: cover;
+}
+.navbar {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: var(--oxford-blue-2);
+  padding-inline: 16px;
+  box-shadow: var(--shadow-1);
+  z-index: 1;
+  overflow: hidden;
+}
+.navbar,
+  .navbar.active {
+    all: unset;
+    display: block;
+    margin-inline: auto 24px;
+  }
+
+  .navbar-list {
+    display: flex;
+    gap: 12px;
+  }
+  
